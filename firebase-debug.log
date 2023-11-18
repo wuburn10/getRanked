@@ -1,0 +1,39 @@
+[debug] [2023-11-18T03:57:35.140Z] ----------------------------------------------------------------------
+[debug] [2023-11-18T03:57:35.142Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\meisr\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js serve
+[debug] [2023-11-18T03:57:35.143Z] CLI Version:   12.9.1
+[debug] [2023-11-18T03:57:35.143Z] Platform:      win32
+[debug] [2023-11-18T03:57:35.144Z] Node Version:  v18.18.2
+[debug] [2023-11-18T03:57:35.144Z] Time:          Sat Nov 18 2023 11:57:35 GMT+0800 (Malaysia Time)
+[debug] [2023-11-18T03:57:35.145Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-11-18T03:57:35.314Z] Object ".hosting.frameworksBackend" in "firebase.json" has unknown property: {"additionalProperty":"maxInstance"}
+[debug] [2023-11-18T03:57:35.314Z] Field ".hosting" in "firebase.json" is possibly invalid: should be array
+[debug] [2023-11-18T03:57:35.315Z] Field ".hosting" in "firebase.json" is possibly invalid: should match some schema in anyOf
+[debug] [2023-11-18T03:57:35.321Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-11-18T03:57:35.321Z] > authorizing via signed-in user (meisreuben@gmail.com)
+[debug] [2023-11-18T03:57:35.322Z] [iam] checking project getranked-a1b82 for permissions ["firebase.projects.get"]
+[debug] [2023-11-18T03:57:35.323Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/getranked-a1b82:testIamPermissions [none]
+[debug] [2023-11-18T03:57:35.324Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/getranked-a1b82:testIamPermissions x-goog-quota-user=projects/getranked-a1b82
+[debug] [2023-11-18T03:57:35.324Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/getranked-a1b82:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-11-18T03:57:36.433Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/getranked-a1b82:testIamPermissions 200
+[debug] [2023-11-18T03:57:36.433Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/getranked-a1b82:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-11-18T03:57:36.434Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/getranked-a1b82 [none]
+[debug] [2023-11-18T03:57:37.063Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/getranked-a1b82 200
+[debug] [2023-11-18T03:57:37.063Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/getranked-a1b82 {"projectId":"getranked-a1b82","projectNumber":"521757980398","displayName":"getRanked","name":"projects/getranked-a1b82","resources":{"hostingSite":"getranked-a1b82"},"state":"ACTIVE","etag":"1_594b2114-3dd9-4cf3-b0d0-97bccfc73488"}
+[info] 
+[info] === Serving from 'D:\Windows.old\Users\Vanessa\Desktop\Reuben\VSC\getRanked\grUI'...
+[info] 
+[debug] [2023-11-18T03:57:37.067Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/getranked-a1b82 [none]
+[debug] [2023-11-18T03:57:37.391Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/getranked-a1b82 200
+[debug] [2023-11-18T03:57:37.392Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/getranked-a1b82 {"projectId":"getranked-a1b82","projectNumber":"521757980398","displayName":"getRanked","name":"projects/getranked-a1b82","resources":{"hostingSite":"getranked-a1b82"},"state":"ACTIVE","etag":"1_594b2114-3dd9-4cf3-b0d0-97bccfc73488"}
+[info] 
+   Thank you for trying our experimental support for SvelteKit on Firebase Hosting.
+   While this integration is maintained by Googlers it is not a supported Firebase product.
+   Issues filed on GitHub will be addressed on a best-effort basis by maintainers and other community members.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/frameworks-overview
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
