@@ -6,6 +6,7 @@
 	let tid: any;
 	let joined: any;
 	let playersReponse: any;
+	let category: any;
 	const toastStore = getToastStore();
 
 	onMount(async function () {
@@ -16,33 +17,43 @@
 
 		playersReponse = await APIService.getTournamentPlayers(tid);
 
-		for (let i = 0; i < playersReponse.players.length; i++) {
-			if (playersReponse.players[i].user_id == uid) {
-				joined = true;
-				break;
+		if (playersReponse.length > 0){
+			for (let i = 0; i < playersReponse.length; i++) {
+				console.log(playersReponse[i].players)
+				for (let j = 0; j < playersReponse[i].players.length; j++) {
+					if (playersReponse[i].players[j].user_id == uid) {
+						joined = true;
+						break;
+					}
+				}
 			}
+		}else{
 			joined = false;
 		}
+
+		
 	});
 
 	async function join() {
-		let joinResponse = await APIService.joinTournament(tid);
-		joined = true;
-		if (joinResponse.code == 0) {
-			toastStore.trigger({
-				message: 'Successfully joined tournament!',
-				background: 'variant-filled-success'
-			});
-		} else if (joinResponse.code == 1) {
-			toastStore.trigger({
-				message: 'Email or Password is incorrect',
-				background: 'variant-filled-error'
-			});
-		} else {
-			toastStore.trigger({
-				message: 'Internal Server Error',
-				background: 'variant-filled-error'
-			});
+		if (category != undefined && category != ""){
+			let joinResponse = await APIService.joinTournament(tid, category);
+			joined = true;
+			if (joinResponse.code == 0) {
+				toastStore.trigger({
+					message: 'Successfully joined tournament!',
+					background: 'variant-filled-success'
+				});	
+			} else if (joinResponse.code == 1) {
+				toastStore.trigger({
+					message: 'Failed to join tournament',
+					background: 'variant-filled-error'
+				});
+			} else {
+				toastStore.trigger({
+					message: 'Internal Server Error',
+					background: 'variant-filled-error'
+				});
+			}
 		}
 	}
 </script>
@@ -50,21 +61,10 @@
 <div class="container h-full mx-auto flex flex-col gap-2 m-4">
 	<div class="flex m-2 flex-col">
 		{#if response != undefined}
-			<div class="space-y-10 flex items-center text-6xl mb-5">
+			<div class=" flex items-center text-6xl mb-5">
 				<p>
 					{response.tournament.tournament_name}
 				</p>
-				{#if joined != undefined}
-					{#if joined != true}
-						<button on:click={join} class="ml-auto mt-0 btn variant-filled-tertiary justify-center">
-							Join Tournament
-						</button>
-					{:else}
-						<button class="ml-auto mt-0 btn variant-filled-tertiary justify-center">
-							Joined ✓</button
-						>
-					{/if}
-				{/if}
 			</div>
 			<div class="space-y-10 flex flex-coltext-xl flex-col">
 				<div class="table-container">
@@ -73,7 +73,7 @@
 						<tbody>
 							<tr>
 								<td class="font-bold">Sport</td>
-								<td>{response.tournament.sport}</td>
+								<td class="capitalize">{response.tournament.sport}</td>
 							</tr>
 							<tr>
 								<td class="font-bold">Dates</td>
@@ -89,7 +89,7 @@
 							</tr>
 							<tr>
 								<td class="font-bold">Tournament Type</td>
-								<td>{response.tournament.tournament_type}</td>
+								<td class="capitalize">{response.tournament.tournament_type}</td>
 							</tr>
 							<tr>
 								<td class="font-bold">Address</td>
@@ -117,13 +117,41 @@
 						</tbody>
 					</table>
 				</div>
+				<div class="flex justify-end">
+					<div class="ml-2">
+						{#if joined != undefined}
+							{#if joined != true}
+								<select class="select w-48" bind:value={category}>
+									<option value="" selected disabled>Category</option>
+									{#each response.categories as c}
+										<option value="{c.category_id}">{c.category_name} ({c.type})</option>
+									{/each}
+								</select>
+								<button on:click={join} class="ml-auto mt-0 btn variant-filled-tertiary justify-center">
+									Join Tournament
+								</button>
+							{:else}
+								<button class="ml-auto mt-0 btn variant-filled-tertiary justify-center">
+									Joined  ✓</button
+								>
+							{/if}
+						{/if}
+					</div>
+				</div>
 				<div>
-					<span class="text-xl font-bold">Players</span>
+					<span class="text-2xl font-bold underline">Players</span>
 					<div class="flex flex-col">
 						{#if playersReponse != undefined}
-							{#each playersReponse.players as p, i}
-								<span>{i + 1}. {p.first_name} {p.last_name}</span>
-							{/each}
+							{#if playersReponse.length <= 0}
+								<span class="italic my-3">No registered players yet.</span>
+							{:else}
+								{#each playersReponse as c}
+									<span class="font-bold text-xl">{c.category.category_name} ({c.category.type})</span>
+									{#each c.players as p, i}
+										<span class="text-lg">{i + 1}. {p.first_name} {p.last_name}</span>
+									{/each}
+								{/each}
+							{/if}
 						{/if}
 					</div>
 					<div />

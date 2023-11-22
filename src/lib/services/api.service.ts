@@ -65,17 +65,18 @@ export abstract class APIService {
 			const response: any = await this.httpService.request.get(
 				'/tournament/players/' + tournamentID
 			);
-			return response;
+			return response.tournament;
 		} catch (e) {
 			throw e;
 		}
 	}
 
-	public static async joinTournament(tournamentID: string): Promise<any> {
+	public static async joinTournament(tournamentID: string, categoryID: string): Promise<any> {
 		try {
 			const response: any = await this.httpService.request
 				.withJSON({
-					tournamentID: tournamentID
+					tournamentID: tournamentID,
+					categoryID: categoryID
 				})
 				.withAuthID()
 				.post('/tournament/join');
